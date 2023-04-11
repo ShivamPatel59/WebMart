@@ -5,6 +5,7 @@ const ApiFeatures = require('../utils/apifeatures');
 
 //Create new product => /api/v1/product/new -- ADMIN
 exports.createProduct =catchAsyncErrors (async (req, res,next) => {
+    // req.body.user = req.user.id;
     const product = await Product.create(req.body);
 
     res.status(201).json({
@@ -37,7 +38,6 @@ exports.updateProduct =catchAsyncErrors ( async (req, res,next) => {
     
     let product = await Product.findById(req.params.id);
 
-    
     if(!product){
         
         return next(new ErrorHander('Product not found',404));
