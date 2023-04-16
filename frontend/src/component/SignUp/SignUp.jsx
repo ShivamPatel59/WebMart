@@ -16,7 +16,7 @@ const SignUp = () => {
       <form className="signin-form">
         <div className="signin-box">
           <header className="signin-heading">
-            <h2>Log In</h2>
+            <h2>Sign In</h2>
           </header>
           <br />
           <div className="signin-inputs">

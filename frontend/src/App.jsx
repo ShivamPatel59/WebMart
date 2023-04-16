@@ -7,6 +7,7 @@ import Home from "./component/home/Home.jsx"
 import ProductDetails from "./component/product/ProductDetails.jsx"
 import LogIn from "./component/LogIn/LogIn";
 import SignUp from "./component/SignUp/SignUp";
+import Cart from "./component/cart/Cart";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/product/:id" element={<ProductDetails />}/>
         <Route exact path="/login" element={<LogIn />}/>
         <Route exact path="/signup" element={<SignUp />}/>
+        <Route exact path="/cart" element={<Cart />}/>
       </Routes>
       <Footer />
     </Router>
