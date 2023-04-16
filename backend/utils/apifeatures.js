@@ -11,7 +11,7 @@ class Apifeatures{
                 $options:'i',
             },
         }:{};
-        console.log(name);
+        // console.log(name);
 
         this.query = this.query.find({...name});
         return this;

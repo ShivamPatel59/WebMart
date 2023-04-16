@@ -6,7 +6,8 @@ const app = express();
 
 const router=express.Router();
 
-router.route('/products').get(isAuthenticUser,authorizeRoles("admin"), getAllProducts);
+// router.route('/products').get(isAuthenticUser,authorizeRoles("admin"), getAllProducts); // uncomment in production
+router.route('/products').get(getAllProducts);
 router.route('/products/new').post(createProduct);
 router.route('/products/:id').get(getSingleProduct).put(isAuthenticUser,authorizeRoles("admin"),updateProduct).delete(isAuthenticUser,authorizeRoles("admin"),deleteProduct);
 
