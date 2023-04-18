@@ -1,23 +1,61 @@
 import React from "react";
 import "./Cart.css";
 import CartProduct from "../CartProduct/CartProduct";
-
-const total = {
-  price: 123,
-  quantity: 7,
-  tax: 15,
-  shipping: 8,
-  total: 345,
-};
+import { getCartItems } from "../../axios/axios";
+// const total = {
+//   price: 0,
+//   quantity: 0,
+//   tax: 0,
+//   shipping: 0,
+//   total: 0,
+// };
 
 const Cart = () => {
-  return (
+  const [total, setTotal] = React.useState({
+    price: 0,
+    quantity: 0,
+    tax: 0,
+    shipping: 0,
+    total: 0,
+  });
+  const [cartItems, setCartItems] = React.useState([]);
+  React.useEffect(() => {
+    getCartItems().then((res) => {
+      setCartItems(res.orders);
+      // console.log(res.orders);
+      let price = 0;
+      let quantity = 0;
+      res.orders.forEach((order) => {
+        order.orderItems.forEach((item) => {
+          price += item.price * item.quantity;
+          quantity += item.quantity;
+        });
+      });
+      setTotal({
+        ...total,
+        price: price,
+        quantity: quantity,
+        tax: price * 0.1,
+        shipping: 10,
+        total: price + price * 0.1 + 10,
+      });
+    });
+  }, []);
+    return (
     <div className="cart-page">
       <div className="cart-items">
-        <CartProduct />
-        <CartProduct />
-        <CartProduct />
-        <CartProduct />
+        {
+          cartItems.map((items) => {
+              {/* console.log(items); */}
+            return items.orderItems.map((item, key) => {
+              return (
+                <div>
+                <CartProduct name={item.name} image={item.image} totalprice={item.price} quantity={total.quantity } id={items._id}/>
+                </div>
+              )
+            })
+          })
+        }
       </div>
       <div className="summary">
         <div class="summary-total-items">

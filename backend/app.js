@@ -13,7 +13,22 @@ const errorMiddleeware = require('./middleware/error');
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(
+    cors({
+      origin: true,
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"],
+      credentials: true,
+    })
+  );
+  app.all("/*", function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "X-Requested-With, Content-Type, Accept"
+    );
+    res.header("Access-Control-Allow-Methods", "POST, GET");
+    next();
+  });
 
 //Route Imports
 const product = require('./routes/productRoutes');

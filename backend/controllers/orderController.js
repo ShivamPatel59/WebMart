@@ -5,15 +5,14 @@ const catchAsyncErrors=require('../middleware/catchAsyncErrors');
 
 //Create new order => /api/v1/order/new
 exports.newOrder=catchAsyncErrors(async(req,res,next)=>{
-    // console.log(req.user._id);
-    const {orderItems,shippingInfo,paymentInfo,itemsPrice,taxPrice,shippingPrice,totalPrice}=req.body;
-    const order=new Order({
-        orderItems,shippingInfo,paymentInfo,itemsPrice,taxPrice,shippingPrice,totalPrice,
-        paidAt:Date.now(),
+    const {orderItems}=req.body;
+    console.log(orderItems);
+    const order = await Order.create({
+        orderItems,
+        totalPrice: orderItems.price * orderItems.quantity,
         user:req.user._id
     })
-    await order.save();
-    res.status(201).json({
+    res.status(200).json({
         success:true,
         order
     })
@@ -34,7 +33,7 @@ exports.getSingleOrder=catchAsyncErrors(async(req,res,next)=>{
 //GET Logged in User order => /api/v1/order/:id
 exports.myOrder=catchAsyncErrors(async(req,res,next)=>{
     const orders=await Order.find({user:req.user.id});
-    
+    console.log(orders);
     res.status(200).json({
         success:true,
         orders
@@ -48,5 +47,17 @@ exports.getAllOrders=catchAsyncErrors(async(req,res,next)=>{
     res.status(200).json({
         success:true,
         orders
+    })
+});
+
+//Delete Order
+exports.deleteOrder=catchAsyncErrors(async(req,res,next)=>{
+    const order=await Order.findById(req.params.id);
+    if(!order){
+        return next(new ErrorHandler('Order not found',200));
+    }
+    await order.deleteOne();
+    res.status(200).json({
+        success:true
     })
 });

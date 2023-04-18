@@ -3,18 +3,17 @@ import "./CartProduct.css";
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
+import { removeCartItem } from "../../axios/axios";
 
-const product = {
-    //cart product details
-    id: 1,
-    name: "Apple iPhone 13 Pro Max",
-    // color: "White",
-    price: 1099,
-    quantity: 2,
-    image: "https://www.refurbished.nl/cache/images/iphone-13-pro-grafiet-frontandback_600x600_BGresize_16777215-tj.png",
-}
 
-const CartProduct = () => {
+
+const CartProduct = ({
+  image,
+  name,
+  totalprice,
+  quantity,
+  id
+}) => {
   var [quantity , setQuantity] = useState(1);
     const increaseQuantity = () => {
         setQuantity(quantity + 1);
@@ -24,18 +23,23 @@ const CartProduct = () => {
             setQuantity(quantity - 1);
         }
     }
+    console.log(quantity, totalprice, name, image);
   return (
     <div class="item">
-      <div class="delete-btn">
+      <div class="delete-btn" onClick={async() => {
+          const response = await removeCartItem(id);
+          window.location.reload()
+          console.log(response);
+      }}  >
         <DeleteIcon />
       </div>
 
       <div class="image">
-        <img src={product.image} alt="" />
+        <img src={image} alt="" />
       </div>
 
       <div class="description">
-        <span>{product.name}</span>
+        <span>{name}</span>
       </div>
 
       <div className="quantity">
@@ -44,7 +48,7 @@ const CartProduct = () => {
         <HorizontalRuleIcon onClick={decreaseQuantity} className="quantity-btn"/>
       </div>
 
-      <div class="total-price">$549</div>
+      <div class="total-price">${totalprice}</div>
     </div>
   );
 };

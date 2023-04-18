@@ -8,16 +8,8 @@ import ProductDetails from "./component/product/ProductDetails.jsx";
 import LogIn from "./component/LogIn/LogIn";
 import SignUp from "./component/SignUp/SignUp";
 import Cart from "./component/cart/Cart";
-import axios from "axios";
 
 function App() {
-  axios
-    .post("http://localhost:4000/demo", {
-      hetu: "Hello",
-    })
-    .then((e) => {
-      console.log(e.data);
-    });
   return (
     <Router>
       <Header />

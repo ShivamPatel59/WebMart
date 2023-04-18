@@ -15,7 +15,7 @@ router.route('/login').post(loginUser);
 router.route('/logout').post(logout);
 
 //User Details => /api/v1/me
-router.route('/me').get( isAuthenticUser, getUserProfile);
+router.route('/me').get(isAuthenticUser, getUserProfile);
 router.route('/password/update').put( isAuthenticUser, updatePassword);
 router.route('/me/update').put( isAuthenticUser, updateProfile);
 router.route('/admin/user').get( isAuthenticUser,authorizeRoles("admin"), allUsersDetails)
