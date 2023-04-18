@@ -1,6 +1,8 @@
 import React from "react";
 import "./header.css";
 import MenuIcon from '@mui/icons-material/Menu';
+import Search from "../Search/Search";
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 const Header = () => {
   function handleClick() {
@@ -16,11 +18,18 @@ const Header = () => {
           </div>
         </i>
         <h1>WebMart</h1>
-        <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Services</li>
-          <li>Contact</li>
+        <ul className="navbar-ul">
+          <li className="">
+            <Search />
+          </li>
+          <li className="navbar-li">Home</li>
+          <li className="navbar-li" onClick={() => {
+            window.location.href = '/signup'
+          }}>Sign Up</li>
+          <li className="navbar-li navbar-cart">
+            <ShoppingCartOutlinedIcon className="cart-icon"/>    Cart
+          </li>
+          <li className="navbar-li">Contact</li>
         </ul>
       </nav>
     </div>

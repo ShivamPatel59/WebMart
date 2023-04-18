@@ -61,7 +61,7 @@ const ProductDetails = ({ match }) => {
       <div className="details">
         <div className="detailsBlock-1">
           <h2>{product.name}</h2>
-          <p>Product # {id}</p>
+          {/* <p>Product # {id}</p> */}
         </div>
         <div className="detailsBlock-2">
           <ReactStars {...options} />
@@ -71,9 +71,15 @@ const ProductDetails = ({ match }) => {
                   <textarea cols={40} ></textarea>
               </div>
           ) }
+          <div>
           <button className="submitReview" onClick={addReview}>
-            {textArea ? "Submit" : "Submit Review"}
+            {textArea ? "cancel" : "Submit Review"}
           </button> 
+          {textArea ? (
+            <button>Submit Review</button>
+          ) : null}
+          </div>
+          
         </div>
         <div className="detailsBlock-4">
           Description : <p>{product.description}</p>

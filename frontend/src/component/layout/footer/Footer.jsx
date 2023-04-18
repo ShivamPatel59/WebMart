@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFacebook } from "@fortawesome/free-brands-svg-icons"
 import { faTwitter } from "@fortawesome/free-brands-svg-icons"
 import { faInstagram } from "@fortawesome/free-brands-svg-icons"
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 
 const Footer = () => {
   return (
@@ -18,6 +19,9 @@ const Footer = () => {
         <a href="#top">
         <FontAwesomeIcon icon={faInstagram} />
         </a>
+        <a href="#top" className="footer-mail">
+        <MailOutlineIcon className="mail-icon" />
+        </a>
       </div>
 
       <div className="footer-left">
@@ -26,13 +30,11 @@ const Footer = () => {
             Home
           </a>
 
-          <a href="#top">Blog</a>
-
-          <a href="#top">Pricing</a>
+          <a href="#top">Help</a>
 
           <a href="#top">About</a>
 
-          <a href="#top">Faq</a>
+          <a href="#top">Details</a>
 
           <a href="#top">Contact</a>
         </p>

@@ -22,7 +22,7 @@ function visibility() {
           <div className="inputs">
             <div className="email-input">
               <span className="user-circle">
-                <AccountCircleIcon fontSize="large"/>
+                <AccountCircleIcon fontSize="medium"/>
               </span>
               <input
                 className="form-input"
@@ -34,7 +34,7 @@ function visibility() {
             </div>
             <div className="password-input">
             <span className="key">
-              <KeyIcon fontSize="large" />
+              <KeyIcon fontSize="medium" />
             </span>
             <input
               className="form-input"
@@ -47,7 +47,7 @@ function visibility() {
               required
             />
             <span>
-            <VisibilityIcon fontSize="large" onClick={visibility}/>
+            <VisibilityIcon fontSize="medium" onClick={visibility}/>
             </span>
             </div>
             <button className="log-in-btn"> Log In </button>

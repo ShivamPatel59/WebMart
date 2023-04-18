@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./CartProduct.css";
 import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
+import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 
 const product = {
     //cart product details
@@ -9,36 +11,37 @@ const product = {
     // color: "White",
     price: 1099,
     quantity: 2,
-    image: "item-1.png",
+    image: "https://www.refurbished.nl/cache/images/iphone-13-pro-grafiet-frontandback_600x600_BGresize_16777215-tj.png",
 }
 
 const CartProduct = () => {
+  var [quantity , setQuantity] = useState(1);
+    const increaseQuantity = () => {
+        setQuantity(quantity + 1);
+    }
+    const decreaseQuantity = () => {
+        if(quantity > 1){
+            setQuantity(quantity - 1);
+        }
+    }
   return (
     <div class="item">
-      <div class="buttons">
-        <span class="delete-btn">
-            <DeleteIcon />
-        </span>
+      <div class="delete-btn">
+        <DeleteIcon />
       </div>
 
       <div class="image">
-        <img src="item-1.png" alt="" />
+        <img src={product.image} alt="" />
       </div>
 
       <div class="description">
-        <span>Common Projects</span>
-        <span>Bball High</span>
-        <span>White</span>
+        <span>{product.name}</span>
       </div>
 
-      <div class="quantity">
-        <button class="plus-btn" type="button" name="button">
-          <img src="plus.svg" alt="" />
-        </button>
-        <input type="text" name="name" value="1" />
-        <button class="minus-btn" type="button" name="button">
-          <img src="minus.svg" alt="" />
-        </button>
+      <div className="quantity">
+        <AddIcon onClick={increaseQuantity} className="quantity-btn"/>
+        <input type="text" name="name" value={quantity} />
+        <HorizontalRuleIcon onClick={decreaseQuantity} className="quantity-btn"/>
       </div>
 
       <div class="total-price">$549</div>
