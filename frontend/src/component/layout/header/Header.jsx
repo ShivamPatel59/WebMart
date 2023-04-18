@@ -26,7 +26,9 @@ const Header = () => {
           <li className="navbar-li" onClick={() => {
             window.location.href = '/signup'
           }}>Sign Up</li>
-          <li className="navbar-li navbar-cart">
+          <li className="navbar-li navbar-cart" onClick={() => {
+            window.location.href = '/cart'
+          }}>
             <ShoppingCartOutlinedIcon className="cart-icon"/>    Cart
           </li>
           <li className="navbar-li">Contact</li>

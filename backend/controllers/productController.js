@@ -21,7 +21,6 @@ exports.getAllProducts =catchAsyncErrors ( async (req, res) => {
     const apiFeatures =new ApiFeatures(Product.find(),req.query)
     .search()
     .filter()   
-    .pagination(resultPerPage);
     
     const products = await apiFeatures.query;
     // const products = await Product.find();

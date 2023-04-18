@@ -4,7 +4,7 @@ const { updateMany } = require('../models/productModel');
 const { isAuthenticUser, authorizeRoles } = require('../middleware/auth');
 const router=express.Router();
 
-router.route('/products').get( getAllProducts);
+router.route('/products').get(isAuthenticUser, getAllProducts);
 router.route('/products/new').post(createProduct);
 router.route('/products/:id').get(getSingleProduct).put(isAuthenticUser,authorizeRoles("admin"),updateProduct).delete(isAuthenticUser,authorizeRoles("admin"),deleteProduct);
 

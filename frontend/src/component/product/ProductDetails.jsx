@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProductDetails } from "../../actions/productActions.js";
 import { useParams } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
+import { addToCart, loadUser } from "../../axios/axios";
 
 const ProductDetails = ({ match }) => {
     // add textarea and submit button after click on submit review  button
@@ -12,7 +13,7 @@ const ProductDetails = ({ match }) => {
     const addReview = () => {
         setTextArea(!textArea);
     }
-
+    
     //increase and decrease quantity of product by clicking on + and - button
     var [quantity , setQuantity] = useState(1);
     const increaseQuantity = () => {
@@ -95,7 +96,19 @@ const ProductDetails = ({ match }) => {
               } />
               <button onClick={increaseQuantity}>+</button>
             </div>
-            <button>Add to Cart</button>
+            <button onClick={async() => {
+              const orderItems = {
+
+                    name: product.name,
+                    quantity: quantity,
+                    price: product.price,
+                    image: product.images[0].url,
+                    product: product._id,
+              }
+                const response = await addToCart(orderItems);
+                console.log(response)
+              window.location.href = "/"
+            }}>Add to Cart</button>
           </div>
         </div>
       </div>

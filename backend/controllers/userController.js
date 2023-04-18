@@ -28,7 +28,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 // Login user => /api/v1/login
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     const { email, password } = req.body;
-
+    console.log(email,password);
     // Checks if email and password is entered by user
     if(!email || !password){
         return next(new ErrorHander("Please Enter Email and Password ",400));
@@ -71,8 +71,15 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
     //Get user details
 
     exports.getUserProfile=catchAsyncErrors(async(req,res,next)=>{
-
+        
+        // if(!req.user){
+        //     return res.json({
+        //         success:false,
+        //         message:"User not found"
+        //     })
+        // }
         const user=await User.findById(req.user.id);
+        console.log(user);
         res.status(200).json({
             success:true,
             user
