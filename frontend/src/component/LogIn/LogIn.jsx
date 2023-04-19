@@ -113,6 +113,10 @@ function visibility() {
                 window.location.href = "/"
                 console.log(response)
             }}/>
+            <input type="submit" value="Create Account" className="log-in-btn" onClick={ async (e) => {
+              e.preventDefault()
+                window.location.href = "/signup"
+            }}/>
           </div>
         </div>
       </form>

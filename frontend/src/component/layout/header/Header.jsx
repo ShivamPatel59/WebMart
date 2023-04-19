@@ -22,10 +22,12 @@ const Header = () => {
           <li className="">
             <Search />
           </li>
-          <li className="navbar-li">Home</li>
           <li className="navbar-li" onClick={() => {
-            window.location.href = '/signup'
-          }}>Sign Up</li>
+            window.location.href = '/'
+          }}>Home</li>
+          <li className="navbar-li" onClick={() => {
+            window.location.href = '/login'
+          }}>Log In</li>
           <li className="navbar-li navbar-cart" onClick={() => {
             window.location.href = '/cart'
           }}>

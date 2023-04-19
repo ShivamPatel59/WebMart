@@ -7,7 +7,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { register } from "../../axios/axios";
 
 const SignUp = () => {
-  var [pwShown, setPwShown] = useState(false);
+  var [pwShown, setPwShown] = useState(true);
 
   function visibility() {
     setPwShown(!pwShown);
