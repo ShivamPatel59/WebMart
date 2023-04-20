@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./home.css";
 import Product from "./Product.js";
 import MetaData from "../layout/MetaData";
@@ -6,11 +6,9 @@ import { getProduct } from "../../actions/productActions"; // eslint-disable-nex
 import { useDispatch, useSelector } from "react-redux"; // eslint-disable-next-line
 import Loader from "../layout/loader/Loader";
 
-const   Home = () => {
+const Home = () => {
   // eslint-disable-next-line
-  const { loading, error, products} = useSelector(
-    (state) => state.products
-  );
+  const { loading, error, products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProduct());
@@ -22,12 +20,22 @@ const   Home = () => {
       ) : (
         <div>
           <MetaData title="WebMart" />
-          <div>
+          {products ? (
             <h3 className="homeHeading">Featured Content</h3>
-          </div>
+          ) : (
+            alert("Sign in to access the resource. Redirecting to Login Page"),
+            setTimeout(() => {
+
+            window.location.href = '/login'
+            }, 0)
+          )}
           <div className="container">
-            {products &&
-              products.map((product) => <Product product={product} />)}
+            
+            {products ? (
+              products.map((product) => <Product product={product} />)
+            ) : (
+              null
+            )}
           </div>
         </div>
       )}

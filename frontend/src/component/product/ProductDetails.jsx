@@ -5,26 +5,25 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProductDetails } from "../../actions/productActions.js";
 import { useParams } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
-import { addToCart, loadUser } from "../../axios/axios";
+import { addToCart } from "../../axios/axios";
 
 const ProductDetails = ({ match }) => {
-    // add textarea and submit button after click on submit review  button
-    var [textArea , setTextArea] = useState(false);
-    const addReview = () => {
-        setTextArea(!textArea);
-    }
-    
-    //increase and decrease quantity of product by clicking on + and - button
-    var [quantity , setQuantity] = useState(1);
-    const increaseQuantity = () => {
-        setQuantity(quantity + 1);
-    }
-    const decreaseQuantity = () => {
-        if(quantity > 1){
-            setQuantity(quantity - 1);
-        }
-    }
+  // add textarea and submit button after click on submit review  button
+  var [textArea, setTextArea] = useState(false);
+  const addReview = () => {
+    setTextArea(!textArea);
+  };
 
+  //increase and decrease quantity of product by clicking on + and - button
+  // var [quantity , setQuantity] = useState(1);
+  // const increaseQuantity = () => {
+  //     setQuantity(quantity + 1);
+  // }
+  // const decreaseQuantity = () => {
+  //     if(quantity > 1){
+  //         setQuantity(quantity - 1);
+  //     }
+  // }
 
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -36,14 +35,14 @@ const ProductDetails = ({ match }) => {
   useEffect(() => {
     dispatch(getProductDetails(id));
   }, [dispatch, id]);
-  const options = {
-    edit: false,
-    color: "rgba(20,20,20,0.1)",
-    activeColor: "gold",
-    size: window.innerWidth < 600 ? 20 : 25,
-    value: product.rating,
-    isHalf: true,
-  };
+
+    // const options = {
+    //   value: 4,
+    //   edit: false,
+    //   size: 24,
+    //   activeColor: "#ffd700",
+    // };
+
   return (
     <div className="ProductDetails">
       <div className="carousel">
@@ -65,50 +64,56 @@ const ProductDetails = ({ match }) => {
           {/* <p>Product # {id}</p> */}
         </div>
         <div className="detailsBlock-2">
-          <ReactStars {...options} />
+          <ReactStars 
+            value={3}
+            edit={false}
+            size={24}
+            activeColor="#ffd700"
+
+          />
           <p>({product.numOfReviews}) Reviews</p>
-          { textArea && (
-              <div>
-                  <textarea cols={40} ></textarea>
-              </div>
-          ) }
+          {textArea && (
+            <div>
+              <textarea cols={40}></textarea>
+            </div>
+          )}
           <div>
-          <button className="submitReview" onClick={addReview}>
-            {textArea ? "cancel" : "Submit Review"}
-          </button> 
-          {textArea ? (
-            <button>Submit Review</button>
-          ) : null}
+            <button className="submitReview" onClick={addReview}>
+              {textArea ? "cancel" : "Submit Review"}
+            </button>
+            {textArea ? <button>Submit Review</button> : null}
           </div>
-          
         </div>
         <div className="detailsBlock-4">
           Description : <p>{product.description}</p>
         </div>
-        
+
         <div className="detailsBlock-3">
           <h2>Price: ₹{product.price}</h2>
           <div className="detailsBlock-3-1">
             <div className="detailsBlock-3-1-1">
-              <button onClick={decreaseQuantity}>-</button>
+              {/* <button onClick={decreaseQuantity}>-</button>
               <input type="number" value= {
                   quantity
               } />
-              <button onClick={increaseQuantity}>+</button>
+              <button onClick={increaseQuantity}>+</button> */}
             </div>
-            <button onClick={async() => {
-              const orderItems = {
-
-                    name: product.name,
-                    quantity: quantity,
-                    price: product.price,
-                    image: product.images[0].url,
-                    product: product._id,
-              }
+            <button
+              onClick={async () => {
+                const orderItems = {
+                  name: product.name,
+                  // quantity: quantity,
+                  price: product.price,
+                  image: product.images[0].url,
+                  product: product._id,
+                };
                 const response = await addToCart(orderItems);
-                console.log(response)
-              window.location.href = "/"
-            }}>Add to Cart</button>
+                console.log(response);
+                window.location.href = "/";
+              }}
+            >
+              Add to Cart
+            </button>
           </div>
         </div>
       </div>

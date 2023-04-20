@@ -46,7 +46,8 @@
 .productCard span {
     overflow: hidden;
     margin: 0.5vmax 0.5vmax;
-    color:coral;
+    color: black;
+    font-weight: 500;
     font-size: 1vmax;
 }
 
