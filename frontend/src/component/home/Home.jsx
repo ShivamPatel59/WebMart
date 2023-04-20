@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./home.css";
 import Product from "./Product.js";
 import MetaData from "../layout/MetaData";

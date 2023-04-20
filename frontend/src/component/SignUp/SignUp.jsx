@@ -17,17 +17,8 @@ const SignUp = () => {
   var[name, setName] = useState("");
   var[email, setEmail] = useState("");
   var[confirmPassword, setConfirmPassword] = useState("");
-  var [isCorrect, setIsCorrect] = useState(false);
 
   console.log(password, name, email)
-  function checkPassword() {
-    if(password === confirmPassword) {
-      setIsCorrect(true);
-    }
-    else {
-      setIsCorrect(false);
-    }
-  }
   return (
     <div className="signin-container">
       <form className="signin-form">
@@ -113,8 +104,7 @@ const SignUp = () => {
               />
             </div>
             {console.log(confirmPassword)}
-            {console.log(isCorrect)}
-            {!isCorrect ? <p className="error">Password does not match</p> : null}
+            {/* {!isCorrect ? <p className="error">Password does not match</p> : null} */}
             {/* <button className="sign-btn" type="submit" onSubmit={()=>{
               // checkPassword()
               if(!isCorrect){
@@ -122,12 +112,16 @@ const SignUp = () => {
                 console.log("dnsdjkad")
               }
             }}>Sign Up</button> */}
+            {
+               (confirmPassword !== password) && <p className="error">Password does not match</p> 
+            }
+            
             <input type="submit" value="Sign Up" className="sign-btn" onClick={ async (e) => {
               e.preventDefault()
-              checkPassword()
-              if(isCorrect){
+              if(confirmPassword === password){
                 const response = await register(name, email, password)
                 console.log(response)
+                // console.log("success");
               }
             }}/>
           </div>

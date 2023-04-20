@@ -16,7 +16,7 @@ export const loadUser = async () => {
 }
 
 export const logout = async () => {
-    const req = await axios.get(`http://localhost:4000/api/v1/logout`, {withCredentials: true})
+    const req = await axios.post(`http://localhost:4000/api/v1/logout`, {withCredentials: true})
     return req.data
 }
 

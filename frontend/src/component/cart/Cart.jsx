@@ -13,7 +13,6 @@ import { getCartItems } from "../../axios/axios";
 const Cart = () => {
   const [total, setTotal] = React.useState({
     price: 0,
-    quantity: 0,
     tax: 0,
     shipping: 0,
     total: 0,
@@ -24,17 +23,14 @@ const Cart = () => {
       setCartItems(res.orders);
       // console.log(res.orders);
       let price = 0;
-      let quantity = 0;
       res.orders.forEach((order) => {
         order.orderItems.forEach((item) => {
-          price += item.price * item.quantity;
-          quantity += item.quantity;
+          price += item.price;
         });
       });
       setTotal({
         ...total,
         price: price,
-        quantity: quantity,
         tax: price * 0.1,
         shipping: 10,
         total: price + price * 0.1 + 10,
@@ -46,7 +42,6 @@ const Cart = () => {
       <div className="cart-items">
         {
           cartItems.map((items) => {
-              {/* console.log(items); */}
             return items.orderItems.map((item, key) => {
               return (
                 <div>
@@ -59,7 +54,7 @@ const Cart = () => {
       </div>
       <div className="summary">
         <div class="summary-total-items">
-          <span class="total-items">{total.quantity} Items in your Bag </span>
+          <span class="total-items">Your Bag </span>
         </div>
         <div class="summary-subtotal">
           <ul>
